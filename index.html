@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buzón CUC Escucha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cuc-blue:    #003B8E;
+      --cuc-blue-dk: #002769;
+      --cuc-gold:    #F5A623;
+      --cuc-gold-lt: #FFD080;
+      --bg:          #F0F4FF;          /* ← rama-1 cambiará este color */
+      --card:        #FFFFFF;
+      --text:        #1A1A2E;
+      --muted:       #5A6A8A;
+      --border:      #D0DCEE;
+      --success:     #1DB87E;
+      --radius:      14px;
+      --shadow:      0 8px 32px rgba(0,59,142,.12);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, var(--cuc-blue) 0%, var(--cuc-blue-dk) 100%);
+      color: #fff;
+      padding: 0 24px;
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 18px 0;
+    }
+
+    .logo-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--cuc-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+
+    .header-text h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: .3px;
+    }
+
+    .header-text p {
+      font-size: .82rem;
+      opacity: .82;
+      margin-top: 2px;
+    }
+
+    /* ── Hero banner ── */
+    .hero {
+      background: linear-gradient(135deg, var(--cuc-blue) 0%, var(--cuc-blue-dk) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 48px 24px 56px;
+    }
+
+    .hero-icon {
+      font-size: 3.5rem;
+      margin-bottom: 12px;
+    }
+
+    .hero h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .hero h2 span { color: var(--cuc-gold); }
+
+    .hero p {
+      max-width: 560px;
+      margin: 0 auto;
+      font-size: .97rem;
+      line-height: 1.65;
+      opacity: .9;
+    }
+
+    /* ── Wave divider ── */
+    .wave {
+      display: block;
+      background: linear-gradient(135deg, var(--cuc-blue) 0%, var(--cuc-blue-dk) 100%);
+    }
+
+    .wave svg { display: block; }
+
+    /* ── Main content ── */
+    main {
+      flex: 1;
+      max-width: 720px;
+      width: 100%;
+      margin: -24px auto 48px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 40px 44px;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--cuc-blue);
+      margin-bottom: 26px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-title::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cuc-gold) 0%, transparent 100%);
+      border-radius: 2px;
+    }
+
+    /* ── Form ── */
+    form { display: flex; flex-direction: column; gap: 20px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+
+    label {
+      font-size: .84rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: .3px;
+      text-transform: uppercase;
+    }
+
+    label span.req { color: var(--cuc-gold); margin-left: 2px; }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: .95rem;
+      color: var(--text);
+      background: #FAFBFF;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--cuc-blue);
+      box-shadow: 0 0 0 3px rgba(0,59,142,.12);
+      background: #fff;
+    }
+
+    select { cursor: pointer; }
+
+    textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+
+    /* character counter */
+    .counter {
+      font-size: .75rem;
+      color: var(--muted);
+      text-align: right;
+      margin-top: -14px;
+    }
+
+    /* ── Submit button ── */
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--cuc-blue) 0%, var(--cuc-blue-dk) 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 32px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 16px rgba(0,59,142,.3);
+      align-self: flex-end;
+      width: 100%;
+    }
+
+    .btn-submit:hover { opacity: .9; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,59,142,.38); }
+    .btn-submit:active { transform: translateY(0); }
+
+    /* ── Success message ── */
+    .success-msg {
+      display: none;
+      background: #EDFAF5;
+      border: 1.5px solid var(--success);
+      border-radius: 10px;
+      padding: 18px 20px;
+      color: #0D7A52;
+      font-weight: 500;
+      font-size: .97rem;
+      text-align: center;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-msg.show { display: flex; }
+
+    /* ── Info cards ── */
+    .info-strip {
+      max-width: 720px;
+      margin: 0 auto 48px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .info-card {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,59,142,.08);
+      border-top: 3px solid var(--cuc-gold);
+    }
+
+    .info-card .icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .info-card h3 { font-size: .92rem; font-weight: 600; color: var(--cuc-blue); margin-bottom: 4px; }
+    .info-card p { font-size: .80rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--cuc-blue-dk);
+      color: rgba(255,255,255,.7);
+      text-align: center;
+      padding: 20px 24px;
+      font-size: .82rem;
+    }
+
+    footer strong { color: var(--cuc-gold); }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .card { padding: 28px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero h2 { font-size: 1.6rem; }
+      .info-strip { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════ HEADER ══════════════ -->
+  <header>
+    <div class="header-inner">
+      <div class="logo-circle">🎓</div>
+      <div class="header-text">
+        <h1>Corporación Universidad de la Costa — CUC</h1>
+        <p>Facultad de Ingeniería · Sistema de Sugerencias</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════ HERO ══════════════ -->
+  <div class="hero">
+    <div class="hero-icon">📬</div>
+    <h2>Buzón <span>CUC</span> Escucha</h2>
+    <p>
+      ¿Tienes una idea para mejorar la experiencia estudiantil?
+      Aquí estamos para escucharte. Tu voz hace la diferencia.
+      Déjanos tu sugerencia sobre bienestar, servicios, clases, inclusión y más.
+    </p>
+  </div>
+
+  <!-- ══════════════ WAVE ══════════════ -->
+  <div class="wave">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
+      <path fill="#F0F4FF" d="M0,60 C360,0 1080,60 1440,20 L1440,60 Z"/>
+    </svg>
+  </div>
+
+  <!-- ══════════════ INFO STRIP ══════════════ -->
+  <div class="info-strip">
+    <div class="info-card">
+      <div class="icon">🔒</div>
+      <h3>Confidencial</h3>
+      <p>Tu información es tratada de forma segura y con total privacidad.</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">⚡</div>
+      <h3>Rápido y Simple</h3>
+      <p>Completa el formulario en menos de 2 minutos y envía tu sugerencia.</p>
+    </div>
+    <div class="info-card">
+      <div class="icon">💡</div>
+      <h3>Genera Cambios</h3>
+      <p>Tus ideas son revisadas por el equipo de bienestar institucional.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════ MAIN FORM ══════════════ -->
+  <main>
+    <div class="card">
+      <div class="card-title">✏️ Ingresa tu sugerencia</div>
+
+      <!-- Success banner -->
+      <div class="success-msg" id="successMsg">
+        ✅ &nbsp;<span>¡Gracias! Tu sugerencia fue enviada correctamente. La revisaremos pronto.</span>
+      </div>
+
+      <form id="buzonForm" novalidate>
+
+        <!-- Fila 1: Nombre + Correo -->
+        <div class="form-row">
+          <div class="field">
+            <label for="nombre">Nombre completo <span class="req">*</span></label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              placeholder="Ej. Sofía Martínez López"
+              maxlength="100"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="correo">Correo institucional <span class="req">*</span></label>
+            <input
+              type="email"
+              id="correo"
+              name="correo"
+              placeholder="usuario@cuc.edu.co"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- Fila 2: Programa académico -->
+        <div class="field">
+          <label for="programa">Programa académico <span class="req">*</span></label>
+          <select id="programa" name="programa" required>
+            <option value="" disabled selected>— Selecciona tu programa —</option>
+            <optgroup label="Facultad de Ingeniería">
+              <option value="ing-sistemas">Ingeniería de Sistemas</option>
+              <option value="ing-industrial">Ingeniería Industrial</option>
+              <option value="ing-civil">Ingeniería Civil</option>
+              <option value="ing-electrica">Ingeniería Eléctrica</option>
+              <option value="ing-electronica">Ingeniería Electrónica</option>
+              <option value="ing-ambiental">Ingeniería Ambiental</option>
+            </optgroup>
+            <optgroup label="Otras Facultades">
+              <option value="arquitectura">Arquitectura</option>
+              <option value="psicologia">Psicología</option>
+              <option value="derecho">Derecho</option>
+              <option value="administracion">Administración de Empresas</option>
+              <option value="contaduria">Contaduría Pública</option>
+              <option value="otro">Otro programa</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <!-- Fila 3: Mensaje -->
+        <div class="field">
+          <label for="mensaje">Tu sugerencia <span class="req">*</span></label>
+          <textarea
+            id="mensaje"
+            name="mensaje"
+            placeholder="Describe tu idea o sugerencia con el mayor detalle posible…"
+            maxlength="800"
+            required
+          ></textarea>
+          <div class="counter"><span id="charCount">0</span> / 800 caracteres</div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn-submit">
+          <span>📨</span> Enviar sugerencia
+        </button>
+
+      </form>
+    </div>
+  </main>
+
+  <!-- ══════════════ FOOTER ══════════════ -->
+  <footer>
+    <p>© 2026 <strong>Corporación Universidad de la Costa — CUC</strong> · Facultad de Ingeniería</p>
+    <p style="margin-top:4px;">Buzón CUC Escucha · Todos los derechos reservados</p>
+  </footer>
+
+  <!-- ══════════════ SCRIPT ══════════════ -->
+  <script>
+    /* Character counter */
+    const textarea  = document.getElementById('mensaje');
+    const charCount = document.getElementById('charCount');
+
+    textarea.addEventListener('input', () => {
+      charCount.textContent = textarea.value.length;
+    });
+
+    /* Form submission */
+    const form       = document.getElementById('buzonForm');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      /* Basic HTML5 validation */
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      /* Collect data (in a real project this would go to a backend / Formspree) */
+      const data = {
+        nombre:   document.getElementById('nombre').value.trim(),
+        correo:   document.getElementById('correo').value.trim(),
+        programa: document.getElementById('programa').value,
+        mensaje:  textarea.value.trim(),
+      };
+
+      console.log('Sugerencia recibida:', data);
+
+      /* Show success message and reset form */
+      form.reset();
+      charCount.textContent = '0';
+      successMsg.classList.add('show');
+      successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      /* Hide success message after 6 seconds */
+      setTimeout(() => successMsg.classList.remove('show'), 6000);
+    });
+  </script>
+</body>
+</html>
