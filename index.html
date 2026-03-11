@@ -277,6 +277,55 @@
     .info-card h3 { font-size: .92rem; font-weight: 600; color: var(--cuc-blue); margin-bottom: 4px; }
     .info-card p { font-size: .80rem; color: var(--muted); line-height: 1.5; }
 
+    /* ── Steps section ── */
+    .steps {
+      max-width: 720px;
+      margin: 0 auto 36px;
+      padding: 0 20px;
+    }
+
+    .steps-title {
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--cuc-blue);
+      margin-bottom: 20px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .step {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 22px 16px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--cuc-blue), var(--cuc-blue-dk));
+      color: #fff;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: .95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+    }
+
+    .step h4 { font-size: .9rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .step p  { font-size: .78rem; color: var(--muted); line-height: 1.5; }
+
+    @media (max-width: 640px) { .steps-grid { grid-template-columns: 1fr; } }
+
     /* ── Footer ── */
     footer {
       background: var(--cuc-blue-dk);
@@ -346,7 +395,27 @@
       <p>Tus ideas son revisadas por el equipo de bienestar institucional.</p>
     </div>
   </div>
-
+  <!-- ═════════════ STEPS ═════════════ -->
+  <div class="steps">
+    <p class="steps-title">📍 ¿Cómo funciona?</p>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Completa el formulario</h4>
+        <p>Ingresa tus datos y escribe tu sugerencia de forma clara y concisa.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Envía tu mensaje</h4>
+        <p>Haz clic en "Enviar sugerencia" y tu mensaje llegará al equipo responsable.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Generamos cambios</h4>
+        <p>El equipo de bienestar revisa cada sugerencia y toma acciones de mejora.</p>
+      </div>
+    </div>
+  </div>
   <!-- ══════════════ MAIN FORM ══════════════ -->
   <main>
     <div class="card">
