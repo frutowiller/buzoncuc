@@ -398,7 +398,25 @@
           </select>
         </div>
 
-        <!-- Fila 3: Mensaje -->
+        <!-- Fila 3: Semestre actual -->
+        <div class="field">
+          <label for="semestre">Semestre actual <span class="req">*</span></label>
+          <select id="semestre" name="semestre" required>
+            <option value="" disabled selected>— Selecciona tu semestre —</option>
+            <option value="1">1° Semestre</option>
+            <option value="2">2° Semestre</option>
+            <option value="3">3° Semestre</option>
+            <option value="4">4° Semestre</option>
+            <option value="5">5° Semestre</option>
+            <option value="6">6° Semestre</option>
+            <option value="7">7° Semestre</option>
+            <option value="8">8° Semestre</option>
+            <option value="9">9° Semestre</option>
+            <option value="10">10° Semestre</option>
+          </select>
+        </div>
+
+        <!-- Fila 4: Mensaje -->
         <div class="field">
           <label for="mensaje">Tu sugerencia <span class="req">*</span></label>
           <textarea
@@ -454,6 +472,7 @@
         nombre:   document.getElementById('nombre').value.trim(),
         correo:   document.getElementById('correo').value.trim(),
         programa: document.getElementById('programa').value,
+        semestre: document.getElementById('semestre').value,
         mensaje:  textarea.value.trim(),
       };
 
