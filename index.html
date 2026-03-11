@@ -12,18 +12,18 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cuc-blue:    #003B8E;
-      --cuc-blue-dk: #002769;
+      --cuc-blue:    #C8102E;
+      --cuc-blue-dk: #9B0C22;
       --cuc-gold:    #F5A623;
       --cuc-gold-lt: #FFD080;
-      --bg:          #E8F5E9;          /* ← color cambiado en rama-estilo */
+      --bg:          #FFF5F5;          /* fondo rojo muy claro */
       --card:        #FFFFFF;
       --text:        #1A1A2E;
-      --muted:       #5A6A8A;
-      --border:      #D0DCEE;
+      --muted:       #7A5A5A;
+      --border:      #EED0D0;
       --success:     #1DB87E;
       --radius:      14px;
-      --shadow:      0 8px 32px rgba(0,59,142,.12);
+      --shadow:      0 8px 32px rgba(200,16,46,.12);
     }
 
     body {
@@ -185,7 +185,7 @@
 
     input:focus, select:focus, textarea:focus {
       border-color: var(--cuc-blue);
-      box-shadow: 0 0 0 3px rgba(0,59,142,.12);
+      box-shadow: 0 0 0 3px rgba(200,16,46,.12);
       background: #fff;
     }
 
@@ -217,12 +217,12 @@
       font-weight: 600;
       cursor: pointer;
       transition: opacity .2s, transform .15s, box-shadow .2s;
-      box-shadow: 0 4px 16px rgba(0,59,142,.3);
+      box-shadow: 0 4px 16px rgba(200,16,46,.3);
       align-self: flex-end;
       width: 100%;
     }
 
-    .btn-submit:hover { opacity: .9; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,59,142,.38); }
+    .btn-submit:hover { opacity: .9; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,16,46,.38); }
     .btn-submit:active { transform: translateY(0); }
 
     /* ── Success message ── */
@@ -258,7 +258,7 @@
       border-radius: 10px;
       padding: 20px 16px;
       text-align: center;
-      box-shadow: 0 2px 12px rgba(0,59,142,.08);
+      box-shadow: 0 2px 12px rgba(200,16,46,.08);
       border-top: 3px solid var(--cuc-gold);
     }
 
@@ -313,7 +313,7 @@
   <!-- ══════════════ WAVE ══════════════ -->
   <div class="wave">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none" height="60">
-      <path fill="#F0F4FF" d="M0,60 C360,0 1080,60 1440,20 L1440,60 Z"/>
+      <path fill="#FFF5F5" d="M0,60 C360,0 1080,60 1440,20 L1440,60 Z"/>
     </svg>
   </div>
 
